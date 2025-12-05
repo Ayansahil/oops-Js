@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>OOPS Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-wrap">
+      <div style="display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          max-width: 900px;">
+
+        <div class="form-card">
+          <h2>Add User</h2>
+          <form id="addUserForm" autocomplete="off">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" type="text" placeholder="Enter full name" />
+            </div>
+
+            <div class="field">
+              <label for="role">Role</label>
+              <input
+                id="role"
+                type="text"
+                placeholder="e.g. Frontend Developer"
+              />
+            </div>
+
+            <div class="field">
+              <label for="bio">Bio</label>
+              <textarea
+                id="bio"
+                placeholder="Short bio about the user"
+              ></textarea>
+            </div>
+
+            <div class="field">
+              <label for="photo">Photo URL</label>
+              <input
+                id="photo"
+                type="url"
+                placeholder="https://example.com/photo.jpg"
+              />
+            </div>
+
+            <div class="submit-wrap">
+              <button class="btn" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="cards-row" aria-hidden="true">
+        <div class="profile-card">
+            <div class="avatar-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="avatar"
+              />
+            </div>
+            <div class="pname">Alex Lee</div>
+            <div class="prole">UI/UX Designer</div>
+            <div class="pbio">
+              Passionate about user experience and clean design. Builds
+              intuitive interfaces and prototypes.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
