@@ -16,63 +16,75 @@ const userManager = {
   },
   addUser: function () {
     this.users.push({
-      username: username.value,
-      role: role.value,
-      bio: bio.value,
-      photo: photo.value,
+      username: username.value.trim(),
+      role: role.value.trim(),
+      bio: bio.value.trim(),
+      photo: photo.value.trim(),
     });
 
     form.reset();
-    this.renderUi;
+    this.renderUi(); // <-- CALL the function
   },
 
   renderUi: function () {
-    this.users.forEach(function (user) {
-      function createUserCard(photo, name, role, bio) {
-        // Main card div
-        const card = document.createElement("div");
-        card.className = "profile-card";
+    // clear existing cards
+    container.innerHTML = "";
 
-        // Avatar wrapper
-        const avatarWrap = document.createElement("div");
-        avatarWrap.className = "avatar-wrap";
+    // helper creates card from a user object
+    const createUserCard = (user, index) => {
+      const card = document.createElement("div");
+      card.className = "profile-card";
 
-        const img = document.createElement("img");
-        img.src = user.photo;
-        img.alt = "avatar";
+      const avatarWrap = document.createElement("div");
+      avatarWrap.className = "avatar-wrap";
 
-        avatarWrap.appendChild(img);
+      const img = document.createElement("img");
+      img.src = user.photo || "https://via.placeholder.com/150";
+      img.alt = "avatar";
+      avatarWrap.appendChild(img);
 
-        // Name
-        const pname = document.createElement("div");
-        pname.className = "pname";
-        pname.textContent = user.username;
+      const pname = document.createElement("div");
+      pname.className = "pname";
+      pname.textContent = user.username || "No name";
 
-        // Role
-        const prole = document.createElement("div");
-        prole.className = "prole";
-        prole.textContent = user.role;
+      const prole = document.createElement("div");
+      prole.className = "prole";
+      prole.textContent = user.role || "";
 
-        // Bio
-        const pbio = document.createElement("div");
-        pbio.className = "pbio";
-        pbio.textContent = user.bio;
+      const pbio = document.createElement("div");
+      pbio.className = "pbio";
+      pbio.textContent = user.bio || "";
 
-        // Assemble card
-        card.appendChild(avatarWrap);
-        card.appendChild(pname);
-        card.appendChild(prole);
-        card.appendChild(pbio);
+      const removeBtn = document.createElement("button");
+      removeBtn.className = "remove-btn";
+      removeBtn.style.color = "red";
+      removeBtn.textContent = "Remove";
 
-        return card;
-      }
-      this.users.forEach((user) => {
-        const card = createUserCard(user);
-        container.appendChild(card);
+      removeBtn.addEventListener("click", function () {
+        userManager.removeUser(index);
       });
+
+      card.appendChild(avatarWrap);
+      card.appendChild(pname);
+      card.appendChild(prole);
+      card.appendChild(pbio);
+      card.appendChild(removeBtn);
+
+      return card;
+    };
+
+    // append each user card
+    this.users.forEach((user, i) => {
+      const card = createUserCard(user, i);
+      container.appendChild(card);
     });
   },
-  removeUser: function () {},
+  // remove user from card
+  removeUser: function (index) {
+    this.users.splice(index, 1);
+    this.renderUi();
+  },
 };
 
 userManager.init();
+userManager.renderUi();
